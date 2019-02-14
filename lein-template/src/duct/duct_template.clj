@@ -39,11 +39,15 @@
    :dirs     web-directories})
 
 (defn cljs-profile [_]
-  {:deps      '[[duct/module.web "0.7.0"]
-                [duct/module.cljs "0.4.0"]]
-   :dev-deps  '[[kerodon "0.9.0"]]
-   :vars      {:cljs? true}
-   :dirs      web-directories
+  {:deps '[[duct/module.web "0.7.0"]
+           [duct/module.cljs "0.4.0"]]
+   :dev-deps '[[kerodon "0.9.0"]]
+   :vars {:cljs? true}
+   :dirs web-directories
+   :extra-config {:amazing? {:short-answer :sure!           ;; TODO remove me
+                             :long-answer :but-what-about-conflicts?}
+                  :access-key-id "JEUDJFKE1573PLDKRNST"     ;; it's fake anyway
+                  }
    :templates {"src/{{dirs}}/client.cljs" (resource "cljs/client.cljs")}})
 
 (defn heroku-profile [{:keys [project-name]}]

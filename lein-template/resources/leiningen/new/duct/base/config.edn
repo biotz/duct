@@ -20,4 +20,8 @@
  :duct.module.web/site {}<</site?>><<#web?>><<^site?>><<^api?>>
  :duct.module/web {}<</api?>><</site?>><</web?>><<#jdbc?>>
  :duct.module/sql {}<</jdbc?>><<#cljs?>>
- :duct.module/cljs {:main <<namespace>>.client}<</cljs?>>}
+ :duct.module/cljs {:main <<namespace>>.client}<</cljs?>>
+ <<#extra-config>>
+
+ <<&k>>
+ <<&v>><</extra-config>>}
