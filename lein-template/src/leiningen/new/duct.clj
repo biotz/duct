@@ -90,7 +90,9 @@
    :deps      (merge-deps (:deps a) (:deps b))
    :dev-deps  (merge-deps (:dev-deps a) (:dev-deps b))
    :templates (into (:templates a) (:templates b))
-   :extra-config (merge (:extra-config a) (:extra-config b))})
+   :extra-base-profile-config (merge (:extra-base-profile-config a)
+                                     (:extra-base-profile-config b))
+   :extra-modules (merge (:extra-modules a) (:extra-modules b))})
 
 (defn project-template [name hints]
   (let [profiles (profile-names hints)
@@ -111,8 +113,11 @@
 (defn generate-project [{:keys [vars templates dirs] :as profile}]
   (let [data (->
                (merge vars (select-keys profile [:deps :dev-deps
-                                                 :extra-config :assoc-in-config]))
-               (update :extra-config
+                                                 :extra-base-profile-config
+                                                 :extra-modules]))
+               (update :extra-base-profile-config
+                       #(mapv (fn [[k v]] {:k k :v v}) %))
+               (update :extra-modules
                        #(mapv (fn [[k v]] {:k k :v v}) %)))
         files (render-templates data templates)]
     (apply templates/->files data (concat files dirs))))
